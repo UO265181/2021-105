@@ -61,6 +61,33 @@
 				</div>
 			</c:forEach>
 		</div>
+		
+		
+		<h2>Comentarios</h2>
+		<div class="row	">
+
+			<jsp:useBean id="comentarios"
+				class="com.uniovi.sdi.ComentariosBean" scope="application" />/>
+			<c:forEach var="comentariosBean" begin="0"
+				items="${comentariosBean.comentarios}">
+				<div class="col-xs-12	col-sm-6	col-md-4	col-lg-3">
+					<div>
+						<div>
+							<c:out value="${comentarios}" />
+						</div>
+						<a
+							href="incluirEnCarrito?producto=<c:out	value="${producto.nombre}"/>"
+							class="btn	btn-default"> <c:out value="${producto.precio}" />
+							€
+						</a>
+					</div>
+				</div>
+			</c:forEach>
+		</div>
+		
+		
+		
+		
 	</div>
 </body>
 </html>
