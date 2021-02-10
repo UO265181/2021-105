@@ -28,6 +28,7 @@
 	<div class="container-fluid">
 		<ul class="nav navbar-nav">
 			<li><a href="incluirEnCarrito">Carrito</a></li>
+			<li><a href="productos">Productos</a></li>
 		</ul>
 		<div class="nav navbar-right">
 			<jsp:getProperty name="contador" property="total" />
