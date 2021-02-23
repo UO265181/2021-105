@@ -1,35 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Notaneitor</title>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-</head>
+<head th:replace="fragments/teacher_head"/>
 <body>
 
-<!-- Barra de Navegación superior -->
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
-      </button>
-      <img src="/img/student-48.png" alt="logo"/>
-    </div>
-    <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="/teacher/list">Ver Profesores</a></li>
-		<li><a href="/teacher/add">Agregar Profesores</a></li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
+<nav th:replace="fragments/teacher_nav"/>
 
 
 <div class="container">
@@ -39,7 +13,7 @@
   <table class="table table-hover">
     <thead>
       <tr>
-        <th class="col-md-1">id</th>
+        <th class="col-md-1">ID</th>
         <th>DNI</th>
         <th>Nombre</th>
 		<th class="col-md-1"> </th>
@@ -52,12 +26,15 @@
 	    <td th:text="${teacher.id}">ID</td>
 	    <td th:text="${teacher.DNI}">DNI</td>
 	    <td th:text="${teacher.name}">Nombre</td>
+	    <td><a th:href="${'/teacher/details/' + teacher.id}">detalles</a></td>
+	    <td><a th:href="${'/teacher/edit/' + teacher.id}">editar</a></td>
+	    <td><a th:href="${'/teacher/delete/' + teacher.id}">eliminar</a></td>
 	  </tr>
 	</tbody>
   </table>
   </div>
 </div>
-
+<footer th:replace="fragments/teacher_footer"/>
 
 </body>
 </html>
