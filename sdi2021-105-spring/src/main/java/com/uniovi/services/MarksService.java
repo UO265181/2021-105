@@ -2,12 +2,16 @@ package com.uniovi.services;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -27,7 +31,6 @@ public class MarksService {
 
 	public List<Mark> getMarks() {
 		List<Mark> marks = new ArrayList<Mark>();
-		marksRepository.findAll().forEach(marks::add);
 		return marks;
 	}
 
@@ -69,6 +72,18 @@ public class MarksService {
 		}
 		if (user.getRole().equals("ROLE_PROFESSOR")) {
 			marks = getMarks();
+		}
+		return marks;
+	}
+
+	public List<Mark> searchMarksByDescriptionAndNameForUser(String searchText, User user) {
+		List<Mark> marks = new ArrayList<Mark>();
+		searchText = "%"+searchText+"%";
+		if (user.getRole().equals("ROLE_STUDENT")) {
+			marks = marksRepository.searchByDescriptionNameAndUser(searchText, user);
+		}
+		if (user.getRole().equals("ROLE_PROFESSOR")) {
+			marks = marksRepository.searchByDescriptionAndName(searchText);
 		}
 		return marks;
 	}
