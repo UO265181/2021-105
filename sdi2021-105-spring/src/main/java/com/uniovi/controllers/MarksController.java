@@ -1,5 +1,10 @@
 package com.uniovi.controllers;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,40 +26,37 @@ public class MarksController {
 
 	@Autowired
 	private UsersService usersService;
-	
+
 	@Autowired
-	 private AddMarkFormValidator addMarkFormValidator;
+	private AddMarkFormValidator addMarkFormValidator;
+
+	@Autowired
+	private HttpSession httpSession;
 
 	@RequestMapping("/mark/list")
 	public String getList(Model model) {
+		
 		model.addAttribute("markList", marksService.getMarks());
 		return "mark/list";
 	}
 
-
-	
-	
 	@RequestMapping(value = "/mark/add", method = RequestMethod.GET)
 	public String getMark(Model model) {
 		model.addAttribute("usersList", usersService.getUsers());
-		model.addAttribute("mark",new Mark());
+		model.addAttribute("mark", new Mark());
 		return "mark/add";
 	}
 
 	@RequestMapping(value = "/mark/add", method = RequestMethod.POST)
 	public String setMark(@Validated Mark mark, BindingResult result) {
 		addMarkFormValidator.validate(mark, result);
-		if(result.hasErrors()) {
+		if (result.hasErrors()) {
 			return "mark/add";
-		}	
+		}
 		marksService.addMark(mark);
 		return "redirect:/mark/list";
 	}
 
-
-	
-	
-	
 	@RequestMapping("/mark/details/{id}")
 	public String getDetail(Model model, @PathVariable Long id) {
 		model.addAttribute("mark", marksService.getMark(id));
