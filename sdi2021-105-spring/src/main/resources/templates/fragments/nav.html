@@ -22,6 +22,23 @@
 						<li><a href="/mark/list" th:text="#{seeMarks.message}">Ver
 								Notas</a></li>
 					</ul></li>
+
+
+				<li id="teachers-menu" class="dropdown"><a class="dropdown-toggle"
+					data-toggle="dropdown" href="#"> Gestión de Profesores <span
+						class="caret"></span>
+				</a>
+					<ul class="dropdown-menu">
+						<li><a sec:authorize="hasRole('ROLE_PROFESSOR')"  href="/teacher/add" >Agregar
+								Profesor</a></li>
+						<li><a href="/teacher/list">Ver
+								Profesores</a></li>
+					</ul></li>
+
+
+
+
+
 				<li id="users-menu" class="dropdown"
 					sec:authorize="hasRole('ROLE_ADMIN')"><a
 					class="dropdown-toggle" data-toggle="dropdown" href="#"
