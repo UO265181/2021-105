@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 import com.uniovi.tests.util.SeleniumUtils;
 
 public class PO_PrivateView extends PO_NavView {
+
 	static public void fillFormAddMark(WebDriver driver, int userOrder, String descriptionp, String scorep) {
 		// Esperamos 5 segundo a que carge el DOM porque en algunos equipos falla
 		SeleniumUtils.esperarSegundos(driver, 5);
@@ -28,5 +29,20 @@ public class PO_PrivateView extends PO_NavView {
 	public static void clickOption(WebDriver driver, String textOption, String criterio, String textoDestino) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public static void logIn(WebDriver driver, String user, String pass, String text)
+	{
+		
+		// Vamos al formulario de logueo.
+		PO_HomeView.clickOption(driver, "login", "class", "btn btn-primary");
+		// Rellenamos el formulario
+		PO_LoginView.fillForm(driver, user , pass );
+		// COmprobamos que entramos en la pagina privada del Profesor
+		PO_View.checkElement(driver, "text", text);		
+	}
+
+	public static void logOut(WebDriver driver) {
+		PO_PrivateView.clickOption(driver, "logout", "text", "Identifícate");
 	}
 }
